@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//SylDoc/action/UserAct.py=utf-8
+encoding//SylDoc/apps.py=utf-8
+encoding//SylDoc/database/UserDb.py=utf-8
+encoding//SylDoc/migrations/0002_auto_20160911_1930.py=utf-8
+encoding//SylDoc/models.py=utf-8
+encoding//SylDoc/utils/check.py=utf-8
+encoding//SylDoc/utils/tools.py=utf-8
+encoding//SylDoc/views.py=utf-8
+encoding//SylDoc_Server/settings.py=utf-8
+encoding//SylDoc_Server/urls.py=utf-8
+encoding//SylDoc_Server/wsgi.py=utf-8
+encoding/TEST.py=utf-8
+encoding/manage.py=utf-8
+encoding/runServer.py=utf-8
