@@ -3,8 +3,8 @@
 
 '''管理员相关'''
 
-from SylDoc.utils.check import checkUser, getPassWord
-from SylDoc.utils.tools import webResponse
+from SylDoc.utils.UserCheckTool import checkUser, getPassWord, checkNick
+from SylDoc.utils.Tools import webResponse
 from SylDoc.models import  WebManager
 
 '''
@@ -47,8 +47,13 @@ def managerAdd(request):  # 添加管理员
     # 获取参数
     username = request.POST.get('username', '')
     userpass = request.POST.get('userpass', '')
+    nickname = request.POST.get('nickname', '')
     newtype = request.POST.get('usertype', '')
     if checkUser(username, userpass):
+        return webResponse("-3")
+    if(nickname == None | nickname == ''):
+        nickname = ''
+    elif checkNick(nickname):
         return webResponse("-3")
     # 用户密码加密
     userpass = getPassWord(userpass)

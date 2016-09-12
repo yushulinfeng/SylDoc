@@ -3,9 +3,6 @@
 
 '''模型'''
 
-from __future__ import unicode_literals
-from django.db import models
+from SylDoc.database.UserDb import *  # @UnusedWildImport
+from SylDoc.database.ManagerDb import *  # @UnusedWildImport
 
-# Create your models here.
-
-from SylDoc.database.UserDb import *
