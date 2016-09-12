@@ -3,7 +3,8 @@
 
 '''用户相关'''
 from SylDoc.utils.UserCheckTool import checkUser, checkNick, getPassWord
-from SylDoc.utils.Tools import webResponse
+from SylDoc.utils.Tools import webResponse, getTodayDate
+from SylDoc.utils.WebMoneyTool import moneyRegister, moneyLogin
 from SylDoc.models import User, UserInfo
 
 '''
@@ -27,14 +28,17 @@ def userRegister(request):  # 用户注册
     db = User(username=username, userpass=userpass)
     try:
         db.save()  # 这句是可能出现异常的，void方法，只能try-catch
-        state = 1
     except:  # 已注册用户由于违反unique而抛出异常
         return webResponse("-4")
-    # 因为不进行save是没有userid的
     # 需要获取最新的注册初始金币
-#     db_info = UserInfo(userid=db.userid, nickname=nickname, \
-#                        exp=0, rank=0, gold=0)
-    return webResponse(str(state))
+    # 因为不进行save是没有userid的
+    db_info = UserInfo(userid=db.userid, nickname=nickname, \
+                        exp=0, rank=0, gold=moneyRegister(), getTodayDate())
+    try:
+        db_info.save()  
+    except:
+        return webResponse("-4")
+    return webResponse("1")
 
 '''
 用户登录
