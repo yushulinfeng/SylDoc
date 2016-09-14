@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 # 书籍表，用于存储与检索
-class Book:
+class Book(models.Model):
     bid = models.CharField(max_length=255, primary_key=True)  # 书籍ID, 时间戳_用户ID
     name = models.CharField(max_length=255)  # 书籍名称
     cls = models.CharField(max_length=255, default='')  # 书籍分类（1-4经史子集）（用户选择，不过string更方便）(静态类二级联动)
@@ -23,10 +23,10 @@ class Book:
     # 书籍存储目录：book-pdf/word/txt形式，以ID命名，不在数据库体现
     
     def __unicode__(self):
-        return self.username
+        return self.bid
 
 # 书籍状态表，用于存储书籍的动态状态
-class BookState:
+class BookState(models.Model):
     bid = models.CharField(max_length=255, primary_key=True)  # 与上面书籍ID对应
     uploader = models.CharField(max_length=255)  # 上传者，对应userid
     upload_time = models.DateTimeField()  # 上传时间
@@ -37,5 +37,5 @@ class BookState:
     download = models.IntegerField(default=0)  # 下载量，暂时忽略
     
     def __unicode__(self):
-        return self.username
+        return self.bid
 
