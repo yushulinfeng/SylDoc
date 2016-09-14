@@ -5,4 +5,5 @@
 
 from SylDoc.database.UserDb import *  # @UnusedWildImport
 from SylDoc.database.ManagerDb import *  # @UnusedWildImport
+from SylDoc.database.BookDb import *  # @UnusedWildImport
 
