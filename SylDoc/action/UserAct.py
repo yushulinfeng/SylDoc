@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 '''用户相关'''
+# ok
 from SylDoc.utils.UserCheckTool import checkUser, checkNick, getPassWord
 from SylDoc.utils.Tools import webResponse, getTodayDate
-from SylDoc.utils.WebMoneyTool import moneyRegister, moneyLogin
+from SylDoc.utils.WebMoneyTool import moneyRegister
 from SylDoc.models import User, UserInfo
 
 '''
@@ -60,6 +61,21 @@ def userLogin(request):  # 用户登录
     if db.exists():  # 数据存在，即登录成功
         state = 1
         request.session['username'] = username
+        # ##可以考虑根据登录日期判断首次登录，给予奖励
     return webResponse(str(state))
+
+
+'''
+用户修改密码
+send:oldpass,newpass/session
+resp:1-succ,-1-fail
+'''
+def userAlterPass(request):
+    pass
+
+
+
+# 用户忘记密码（暂不处理）
+
 
 

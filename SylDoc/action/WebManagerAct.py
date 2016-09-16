@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '''管理员相关'''
-
+# ok
 from SylDoc.utils.UserCheckTool import checkUser, getPassWord, checkNick
 from SylDoc.utils.Tools import webResponse
 from SylDoc.models import  WebManager
@@ -106,6 +106,11 @@ def managerAlter(request):  # 修改管理员类型
     except:   
         return webResponse("-3")
 
+'''
+获取所有管理员
+send:username,usertype
+resp:json-succ,-1-login
+'''
 def managerAll(request):  # 获取所有管理员
     usertype = request.session['usertype']
     if(usertype == None):  # 未登录
