@@ -1,7 +1,11 @@
 eclipse.preferences.version=1
 encoding//SylDoc/action/BookAct.py=utf-8
+encoding//SylDoc/action/BrowseAct.py=utf-8
 encoding//SylDoc/action/UserAct.py=utf-8
+encoding//SylDoc/action/UserInfoAct.py=utf-8
 encoding//SylDoc/action/WebManagerAct.py=utf-8
+encoding//SylDoc/action/WebOperateAct.py=utf-8
+encoding//SylDoc/action/WebVerifyAct.py=utf-8
 encoding//SylDoc/apps.py=utf-8
 encoding//SylDoc/database/BookDb.py=utf-8
 encoding//SylDoc/database/ManagerDb.py=utf-8
