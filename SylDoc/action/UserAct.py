@@ -21,7 +21,7 @@ def userRegister(request):  # 用户注册
     state = checkUser(username, userpass)
     if state:
         return webResponse(str(state))
-    if checkNick(nickname):  # 必须填写合法昵称
+    if checkNick(nickname) != 0:  # 必须填写合法昵称
         return webResponse("-3")
     # 用户密码加密
     userpass = getPassWord(userpass)
@@ -58,10 +58,10 @@ def userLogin(request):  # 用户登录
     userpass = getPassWord(userpass)
     # 核对数据库
     db = User.objects.filter(username=username, userpass=userpass)
-    if db.exists():  # 数据存在，即登录成功
+    for u in db:  # 登录成功
         state = 1
-        request.session['username'] = username
-        # ##可以考虑根据登录日期判断首次登录，给予奖励
+        request.session['userid'] = u.userid
+    # ##可以考虑根据登录日期判断首次登录，给予奖励
     return webResponse(str(state))
 
 

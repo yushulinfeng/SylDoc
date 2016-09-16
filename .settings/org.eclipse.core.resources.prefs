@@ -14,6 +14,7 @@ encoding//SylDoc/migrations/0002_auto_20160911_1930.py=utf-8
 encoding//SylDoc/models.py=utf-8
 encoding//SylDoc/utils/Tools.py=utf-8
 encoding//SylDoc/utils/UserCheckTool.py=utf-8
+encoding//SylDoc/utils/UserInfoTool.py=utf-8
 encoding//SylDoc/utils/WebIndexTool.py=utf-8
 encoding//SylDoc/utils/WebMoneyTool.py=utf-8
 encoding//SylDoc/views.py=utf-8
