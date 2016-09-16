@@ -5,7 +5,6 @@
 
 import re
 import hashlib
-from django.contrib.auth.mixins import UserPassesTestMixin
 
 # 用户相关的检查
 def checkUser(username, userpass, nickname=None):

@@ -122,7 +122,7 @@ def managerAll(request):  # 获取所有管理员
         if u != None:
             if res != "[" :
                 res += ","
-            res += "{'name':'" + u.username + "','type':'" + u.usertype + "'}";
+            res += "{'name':'" + u.username + "','type':" + u.usertype + "}";
     res += "]"
     return webResponse(res)
 

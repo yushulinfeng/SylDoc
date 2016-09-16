@@ -10,7 +10,7 @@ from django.db import models
 class WebManager(models.Model):
     username = models.CharField(max_length=255)  # 这个就不用显式ID了
     userpass = models.CharField(max_length=255)
-    usertype = models.IntegerField()
+    usertype = models.IntegerField()#0super(no del),1super,2content,3operator,4virify
     nickname = models.CharField(max_length=255, default='')  # 指定default才能允许为空
     
     def __unicode__(self):

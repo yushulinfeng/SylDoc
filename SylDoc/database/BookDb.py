@@ -5,6 +5,7 @@
 
 from __future__ import unicode_literals
 from django.db import models
+import json
 
 # 书籍表，用于存储与检索
 class Book(models.Model):
@@ -21,9 +22,18 @@ class Book(models.Model):
     auth_describe = models.TextField(default='')  # 作者描述，多个分段写就行
     check_state = models.IntegerField(default=0)  # 审核状态(0未审核，1通过，-1拒绝（或删除此行）)
     # 书籍存储目录：book-pdf/word/txt形式，以ID命名，不在数据库体现
+    # 还有一个书籍封面问题，cover_path
     
     def __unicode__(self):
         return self.bid
+
+    # 将属性和属性值转换成dict 列表生成式  
+    def toDict(self):  
+        return dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields]])  # type(self._meta.fields).__name__  
+    
+    # 封装为json，此方法需要测试一下
+    def toJson(self):
+        json.dumps(self.toDict(), ensure_ascii=False)  
 
 # 书籍状态表，用于存储书籍的动态状态
 class BookState(models.Model):
