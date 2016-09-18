@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8" content="">
+   <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script> 
 </head>
 <body>
 测试页面
@@ -16,6 +17,34 @@
 <input type="file" name="sdocFile"/>
 <input type="submit" name="submit" value="ok"/>
 </form>
+
+
+<br/><br/>
+<center> 
+		<dl id="test_dl">
+			<dt>TITLE</dt>
+			<dd>0</dd>
+		</dl>
+		
+		<button type="button" 
+		id="login">添加</button>
+		<button type="button" 
+		id="clear">清空</button>
+		
+</center>
+ 
+ <script>
+var a=1;
+$('#login').click(function userLogin() {
+	 $("#test_dl").append("<dd>"+ a++ +"</dd>");
+});
+$('#clear').click(function userLogin() {
+	 $("#test_dl").text("");
+	 $("#test_dl").append("<dt>TITLE</dt>");
+	 a=1;
+});
+</script>
+
 
 </body>
 </html>

@@ -12,4 +12,12 @@ urlpatterns = [
     # 静态页面目录
     url(r'^SylDoc/HomePage/(?P<path>.*)$', static.serve, \
          { 'document_root': settings.STATIC_ROOT }),
+    # 管理员相关
+    url(r'^SylDoc/manager/$', views.manager),
+    url(r'^SylDoc/managerLogin/$', views.managerLogin),
+    url(r'^SylDoc/managerAll/$', views.managerAll),
+    url(r'^SylDoc/managerAdd/$', views.managerAdd),
+    url(r'^SylDoc/managerAlter/$', views.managerAlter),
+    url(r'^SylDoc/managerDel/$', views.managerDel),
+
 ]

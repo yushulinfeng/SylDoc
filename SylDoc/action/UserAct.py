@@ -70,12 +70,11 @@ def userLogin(request):  # 用户登录
 send:oldpass,newpass/session
 resp:1-succ,-1-fail
 '''
-def userAlterPass(request):
+def userAlterPass(request):  # 暂不处理
     pass
 
-
-
 # 用户忘记密码（暂不处理）
-
+def userForgetPass(request):
+    pass
 
 

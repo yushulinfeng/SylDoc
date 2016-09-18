@@ -9,15 +9,17 @@ import hashlib
 # 用户相关的检查
 def checkUser(username, userpass, nickname=None):
     # 邮箱验证
-    pattern = re.compile(r'^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$')
-    match = pattern.match(username)
-    if not match:
-        return -1;
+    if(username!=None):
+        pattern = re.compile(r'^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$')
+        match = pattern.match(username)
+        if not match:
+            return -1;
     # 密码验证
-    pattern = re.compile(r'^\w{4,20}$')
-    match = pattern.match(userpass)
-    if not match:
-        return -2;
+    if(userpass!=None):
+        pattern = re.compile(r'^\w{4,20}$')
+        match = pattern.match(userpass)
+        if not match:
+            return -2;
     return 0;
     
 def checkNick(nickname):

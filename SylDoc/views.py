@@ -4,10 +4,13 @@
 '''视图'''
 
 from django.shortcuts import render
-from django.http.response import HttpResponseRedirect
+from SylDoc.utils.Tools import htmlResponse
 
-# Create your views here.
+from SylDoc.action.WebManagerAct import *
 
 def homePage(request):
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/SylDoc/HomePage/index.html'))
+    return htmlResponse(request , '/SylDoc/HomePage/main/index.html') 
+
+def manager(request):
+    return htmlResponse(request , '/SylDoc/HomePage/manager/webLogin.html') 
 

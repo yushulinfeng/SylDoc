@@ -10,13 +10,13 @@ from SylDoc.models import  WebManager
 '''
 管理员登录
 send:username,userpass
-resp:1-succ,-1-fail
+resp:0+type(管理员类型)-succ,-1-fail
 '''
 def managerLogin(request):  # 管理员登录
     # 获取参数
     username = request.POST.get('username', '')
     userpass = request.POST.get('userpass', '')
-    state = checkUser(username, userpass)
+    state = checkUser(None, userpass)
     if state:
         return webResponse("-1")
     # 用户密码加密
@@ -26,13 +26,13 @@ def managerLogin(request):  # 管理员登录
     usertype = 0
     state = -1
     for u in db:
-        if u != None:
-            state = 1
-            usertype = u.usertype
-            break
+        state = 1
+        usertype = u.usertype
+        break
     if state == 1:
         request.session['usertype'] = usertype
-    return webResponse(str(state))
+        return webResponse(str(usertype))
+    return webResponse("-1")
 
 '''添加管理员
 send:username,userpass,usertype
@@ -42,23 +42,23 @@ def managerAdd(request):  # 添加管理员
     usertype = request.session['usertype']
     if(usertype == None):  # 未登录
         return webResponse("-1")
-    if(usertype != '0' & usertype != '1'):  # 权限不够
+    if(usertype != 0 & usertype != 1):  # 权限不够
         return webResponse("-2")
     # 获取参数
     username = request.POST.get('username', '')
     userpass = request.POST.get('userpass', '')
     nickname = request.POST.get('nickname', '')
     newtype = request.POST.get('usertype', '')
-    if checkUser(username, userpass):
-        return webResponse("-3")
-    if(nickname == None | nickname == ''):
-        nickname = ''
-    elif checkNick(nickname):
-        return webResponse("-3")
+###对于管理员，暂时不做限制
+#     if checkUser(None, username)|checkUser(None, userpass):
+#         return webResponse("-3")
+#     elif checkNick(nickname):
+#         return webResponse("-6")
     # 用户密码加密
     userpass = getPassWord(userpass)
-    # 存入数据库
-    db = WebManager(username=username, userpass=userpass, usertype=newtype)
+    # 存入数据库(暂时不管重复问题)
+    db = WebManager(username=username, userpass=userpass,\
+                    nickname=nickname, usertype=newtype)
     try:
         db.save()  # 这句是可能出现异常的，void方法，只能try-catch
         return webResponse("1")
@@ -73,9 +73,9 @@ resp:1-succ,-1-login,-2-power,-3error
 def managerDel(request):  # 删除管理员
     usertype = request.session['usertype']
     if(usertype == None):  # 未登录
-        return webResponse(str(-1))
-    if(usertype != '0' & usertype != '1'):  # 权限不够
-        return webResponse(str(-2))
+        return webResponse("-1")
+    if(usertype != 0 & usertype != 1):  # 权限不够
+        return webResponse("-2")
     username = request.POST.get('username', '')
     # 查找数据库
     db = WebManager.objects.filter(username=username)
@@ -94,7 +94,7 @@ def managerAlter(request):  # 修改管理员类型
     usertype = request.session['usertype']
     if(usertype == None):  # 未登录
         return webResponse("-1")
-    if(usertype != '0' & usertype != '1'):  # 权限不够
+    if(usertype != 0 & usertype != 1):  # 权限不够
         return webResponse("-2")
     username = request.POST.get('username', '')
     newtype = request.POST.get('usertype', '')
@@ -108,7 +108,7 @@ def managerAlter(request):  # 修改管理员类型
 
 '''
 获取所有管理员
-send:username,usertype
+send:null
 resp:json-succ,-1-login
 '''
 def managerAll(request):  # 获取所有管理员
@@ -122,7 +122,8 @@ def managerAll(request):  # 获取所有管理员
         if u != None:
             if res != "[" :
                 res += ","
-            res += "{'name':'" + u.username + "','type':" + u.usertype + "}";
+            res += "{'name':'" + u.username + "','nick':'"+u.nickname+\
+            "','type':" + str(u.usertype) + "}";
     res += "]"
     return webResponse(res)
 
